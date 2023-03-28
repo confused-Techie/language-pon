@@ -1,0 +1,99 @@
+scopeName: 'source.pon'
+name: 'Pulsar Object Notation'
+fileTypes: [
+  'pon'
+]
+
+patterns: [
+  {
+    name: "comment.line"
+    match: "<¿--<<.*>>--\\?>"
+  }
+  {
+    name: "comment.block"
+    begin: "<¡--<<.*"
+    '0':
+      name: "comment.block"
+    end: "^.*>>--!>"
+    endCaptures:
+      '0':
+        name: "comment.block"
+  }
+  {
+    name: "meta.type.declaration"
+    match: "^(Dim) ([a-zA-Z]+) (As) ([a-zA-Z]+)$"
+    captures:
+      "1": # Dim
+        name: "support.constant"
+      "2": # Variable name
+        name: "variable.parameter"
+      "3": # As
+        name: "support.constant"
+      "4": # Type Declaration
+        name: "support.type"
+  }
+  # For simplicity, the following items can be toeknized by symbol alone.
+  {
+    name: "keyword.operator"
+    match: "#"
+    # Depth Indicator
+  }
+  {
+    name: "keyword.operator"
+    match: "\\["
+    # Start Object
+  }
+  {
+    name: "keyword.operator"
+    match: "\\];"
+    # End Object
+  }
+  {
+    name: "meta.function"
+    match: "(.[a-zA-Z]+)(:=)"
+    # Equality Symbol
+    captures:
+      "1":
+        name: "variable.parameter"
+        # The actual symbol for the text of thie vraible name
+      "2":
+        name: "keyword.operator"
+  }
+  {
+    name: "constant.boolean"
+    patterns: [
+      {
+        name: "constant.language"
+        match: "<<untrue>>"
+      }
+      {
+        name: "constant.language"
+        match: "<<unfalse>>"
+      }
+    ]
+  }
+  {
+    name: "constant.character"
+    match: "<<(untrue)>>"
+    captures:
+      "1":
+        name: "support.constant"
+  }
+  {
+    name: "constant.character"
+    match: "<<(unfalse)>>"
+    captures:
+      "1":
+        name: "support.constant"
+  }
+  {
+    name: "constant.character"
+    match: "<<.*>>"
+    # Value definition
+  }
+  {
+    name: "keyword.control"
+    match: "(\\d+.?)+"
+    # Index Value
+  }
+]

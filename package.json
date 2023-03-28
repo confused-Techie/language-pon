@@ -1,0 +1,12 @@
+{
+  "name": "language-pon",
+  "version": "1.0.0",
+  "description": "Pulsar Object Notation Syntax Highlighting in Pulsar",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [ "text-mate", "pulsar-package", "pulsar-edit" ],
+  "author": "confused-Techie",
+  "license": "MIT",
+  "repository": "https://github.com/confused-Techie/language-pon"
+}
